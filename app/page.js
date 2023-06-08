@@ -1,10 +1,25 @@
+'use client';
 import Image from 'next/image'
 import styles from './page.module.css'
+import supabase from './utils/supabase'
+import { useState, useEffect } from 'react'
 
 export default function Home() {
+  const [profiles, setProfile] = useState([]);
+
+  const getProfile = async () => {
+    const { data } = await supabase.from('profile').select();
+    setProfile(data);
+  }
+
+  useEffect(() => {
+    getProfile()
+  }, [])
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
+        <p className={styles.code}>{profiles[0].user_name}</p>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>
