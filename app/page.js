@@ -19,7 +19,13 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p className={styles.code}>{profiles[0].user_name}</p>
+        {profiles.map((profile) => (
+          <p key="profile.user_id" className={styles.code}>
+            User name: {profile.user_name}
+            <br/>
+            Name: {profile.first_name}{profile.last_name}
+          </p>
+        ))}
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>
